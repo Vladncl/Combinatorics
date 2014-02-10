@@ -1,6 +1,52 @@
-*.class
+package exercises;
 
-# Package Files #
-*.jar
-*.war
-*.ear
+public class C {
+	int value1;
+	int value2;
+
+	public int getFactorial(int value) {
+		int inval = 1;
+		for (int i = 1; i <= value; i++) {
+			inval *= i;
+		}
+		return inval;
+	}
+
+	public C(int value1, int value2) {
+		this.value1 = value1;
+		this.value2 = value2;
+	}
+
+	public int getC() {
+
+		if (value2 == 0) {
+			return 1;
+		}
+		if (value1 == value2) {
+			return 1;
+		}
+		if (value2 > value1) {
+			return 0;
+
+		}
+		if (value1 > value2 && value2 > 0) {
+			// n!/(n-k)!* k!)
+
+			return ((getFactorial(value1 - 1)) / (getFactorial((value1 - 1)
+					- (value2 - 1)) * getFactorial(value2 - 1)))
+					+ (getFactorial(value1 - 1))
+					/ (getFactorial((value1 - 1) - value2) * getFactorial(value2));
+		} else {
+			return (getFactorial(value1)) / (getFactorial(value1 - value2))
+					* getFactorial(value2);
+		}
+	}
+
+	public static void main(String[] args) {
+
+		C cad = new C(10, 5);
+		int result = cad.getC();
+		System.out.println("Result: " + result);
+	}
+
+}
