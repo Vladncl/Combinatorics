@@ -1,52 +1,46 @@
-package exercises;
+public class Comb {
+	double x;
+	double y;
 
-public class C {
-	int value1;
-	int value2;
+	public Comb() {
 
-	public int getFactorial(int value) {
-		int inval = 1;
+	}
+
+	public double getFactorial(double value) {
+		double inval = 1;
 		for (int i = 1; i <= value; i++) {
 			inval *= i;
 		}
 		return inval;
 	}
 
-	public C(int value1, int value2) {
-		this.value1 = value1;
-		this.value2 = value2;
+	public double getC(double value1, double value2) {
+
+		return (getFactorial(value1))
+				/ ((getFactorial(value1 - value2)) * getFactorial(value2));
 	}
 
-	public int getC() {
+	public double getComb(double x, double y) {
+		this.x = x;
+		this.y = y;
 
-		if (value2 == 0) {
+		if (y == 0 || x == 0) {
 			return 1;
 		}
-		if (value1 == value2) {
+		if (x == y) {
 			return 1;
 		}
-		if (value2 > value1) {
+		if (y > x) {
 			return 0;
-
 		}
-		if (value1 > value2 && value2 > 0) {
-			// n!/(n-k)!* k!)
-
-			return ((getFactorial(value1 - 1)) / (getFactorial((value1 - 1)
-					- (value2 - 1)) * getFactorial(value2 - 1)))
-					+ (getFactorial(value1 - 1))
-					/ (getFactorial((value1 - 1) - value2) * getFactorial(value2));
-		} else {
-			return (getFactorial(value1)) / (getFactorial(value1 - value2))
-					* getFactorial(value2);
+		// c(n, k) = c(n-1, k-1) + c(n-1, k) if 0<k<n
+		else {
+			return getC(x - 1, y - 1) + getC(x - 1, y);
 		}
 	}
 
 	public static void main(String[] args) {
-
-		C cad = new C(10, 5);
-		int result = cad.getC();
-		System.out.println("Result: " + result);
+		Comb comb = new Comb();
+		System.out.println("Result: " + comb.getComb(4, 3));
 	}
-
 }
