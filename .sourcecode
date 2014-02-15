@@ -1,46 +1,31 @@
-public class Comb {
-	double x;
-	double y;
+package exercises;
 
-	public Comb() {
+public class Combinations {
+
+	public Combinations() {
 
 	}
 
-	public double getFactorial(double value) {
-		double inval = 1;
-		for (int i = 1; i <= value; i++) {
-			inval *= i;
-		}
-		return inval;
-	}
+	public int Combinations(int n, int k) {
 
-	public double getC(double value1, double value2) {
-
-		return (getFactorial(value1))
-				/ ((getFactorial(value1 - value2)) * getFactorial(value2));
-	}
-
-	public double getComb(double x, double y) {
-		this.x = x;
-		this.y = y;
-
-		if (y == 0 || x == 0) {
+		if (k == 0) {
 			return 1;
 		}
-		if (x == y) {
+		if (k == n) {
 			return 1;
 		}
-		if (y > x) {
+		if (k > n) {
 			return 0;
+		} else {
+			return Combinations(n - 1, k - 1) + Combinations(n - 1, k);
 		}
-		// c(n, k) = c(n-1, k-1) + c(n-1, k) if 0<k<n
-		else {
-			return getC(x - 1, y - 1) + getC(x - 1, y);
-		}
+
 	}
 
 	public static void main(String[] args) {
-		Comb comb = new Comb();
-		System.out.println("Result: " + comb.getComb(4, 3));
+		Combinations c = new Combinations();
+
+		System.out.println(c.Combinations(10, 5));
 	}
+
 }
